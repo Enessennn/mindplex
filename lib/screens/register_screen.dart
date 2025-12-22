@@ -17,7 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isLoading = false;
 
   void _kayitOl() async {
-    // 1. Basit Kontrol: Alanlar boş mu?
+    // 1. Basit Kontrol: Alanlar boş mu
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Lütfen tüm alanları doldurun")));
        return;

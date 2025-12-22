@@ -87,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                         alignment: Alignment.topRight,
                         child: IconButton(onPressed: (){
                           AuthService().signOut();
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));//Login ekranına yönlendirme
                         }, icon: Icon(Icons.logout,color:Colors.white70),
                         tooltip: "Çıkış Yap",
                         ),

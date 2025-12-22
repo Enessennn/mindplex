@@ -67,7 +67,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Eğer doğrulandıysa Ana Ekrana gönder
+    // Eğer doğrulandıysa ana Ekrana gönder
     if (isEmailVerified) {
       return const MainScreen();
     }

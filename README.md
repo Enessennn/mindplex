@@ -3,7 +3,7 @@
 ![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 
-MindPlex, kullanıcıların kelime dağarcığını geliştirmeyi hedefleyen, oyunlaştırma (gamification) ögeleriyle süslenmiş modern bir Flutter uygulamasıdır.
+MindPlex, kullanıcıların kelime dağarcığını geliştirmeyi hedefleyen, oyunlaştırma ögeleriyle süslenmiş modern bir Flutter uygulamasıdır.
 
 ## 📱 Uygulama İçi Görseller
 
@@ -15,7 +15,7 @@ Kullanıcıların Firebase altyapısı ile güvenli bir şekilde hesap oluşturu
 | ![Login Ekranı](assets/login.png) | ![Kayıt Ekranı](assets/register.png) |
 | E-posta ve şifre ile güvenli giriş. Hata durumunda kullanıcı dostu uyarılar. | Yeni kullanıcılar için hızlı kayıt formu. Firebase Authentication entegrasyonu. |
 
----
+---gi
 
 ### 2. Ana Merkez ve Oyunlar
 Glassmorphism (Buzlu Cam) tasarım diliyle hazırlanan ana kontrol paneli ve oyun seçim ekranı.

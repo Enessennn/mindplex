@@ -16,7 +16,7 @@ class _ShopScreenState extends State<ShopScreen> {
       "id": "hint_pack",
       "name": "5'li İpucu",
       "desc": "Zorlandığında kullan.",
-      "price": 250,
+      "price": 25,
       "icon": Icons.lightbulb_circle,
       "color": Colors.orange
     },

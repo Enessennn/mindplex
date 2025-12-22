@@ -18,7 +18,7 @@ class WordService {
       print("Kelime listesi yüklendi. Toplam kelime: ${_kelimeListesi.length}");
     } catch (e) {
       print("JSON okuma hatası: $e");
-      // Hata olursa boş liste kalmasın diye varsayılan birkaç kelime ekleyelim
+      // Hata olursa  varsayılan birkaç kelime ekleyelim
       _kelimeListesi = ["apple", "banana", "computer"]; 
     }
   }

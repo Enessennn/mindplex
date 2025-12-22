@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../service/auth_service.dart';
-import 'register_screen.dart'; // Birazdan oluşturacağız, hata verirse dert etme
+import 'register_screen.dart'; 
 import '../main.dart'; // Ana ekrana gitmek için
 
 class LoginScreen extends StatefulWidget {

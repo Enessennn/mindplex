@@ -70,10 +70,10 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _widgetOptions = <Widget>[
-      RealHomeScreen(onNavigate: _onItemTapped), // Ana Sayfa
-      const GameHomeScreen(),                     // Oyunlar
-      const ShopScreen(),                         // Mağaza
-      const ProfileScreen(),                      // Profil
+      RealHomeScreen(onNavigate: _onItemTapped), 
+      const GameHomeScreen(),                     
+      const ShopScreen(),                         
+      const ProfileScreen(),                      
     ];
   }
 

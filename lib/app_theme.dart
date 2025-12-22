@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // --- ANA RENK PALETİ ---
-const kPrimaryColor = Color(0xFF6F35A5); // Ana Mor
+const kPrimaryColor = Color(0xFF6F35A5); 
 const kPrimaryLightColor = Color(0xFFF1E6FF); // Açık Mor
 const kCardColor = Colors.white; 
 const kBackgroundColor = Color(0xFFF5F7FA);

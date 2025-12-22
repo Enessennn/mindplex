@@ -205,7 +205,7 @@ class _WordGameScreenState extends State<WordGameScreen> {
 
     // 3. Karar Anı: Bedava mı, Paralı mı?
     if (freeHints > 0) {
-       // Bedava hakkı var, onu kullan
+       //  hakkı var, onu kullan
        await DatabaseService().useFreeHint();
        if (!mounted) return;
        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Ücretsiz ipucu kullanıldı!"), duration: Duration(milliseconds: 800)));

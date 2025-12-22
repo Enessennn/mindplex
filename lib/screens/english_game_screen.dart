@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart'; // EKLENDİ: Veritabanı verisi tipi için
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 import 'package:flutter/material.dart';
 import '../service/word_service.dart';
 import '../service/database_service.dart';
@@ -13,7 +13,7 @@ class EnglishGameScreen extends StatefulWidget {
 class _EnglishGameScreenState extends State<EnglishGameScreen> {
   final WordService _wordService = WordService();
   
-  // Değişkenler
+  // Değişkenler..
   String soruMetni = "Yükleniyor...";
   String dogruCevap = "";
   List<String> siklar = [];

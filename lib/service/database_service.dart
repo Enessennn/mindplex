@@ -46,7 +46,7 @@ class DatabaseService {
       return true;
     }
 
-    // NORMAL EŞYA (Sadece 1 kere alınabilir)
+    // NORMAL EŞYA (1 kere alınabilir)
     if (inventory.contains(itemId)) return true; // Zaten var
 
     await userRef.update({
