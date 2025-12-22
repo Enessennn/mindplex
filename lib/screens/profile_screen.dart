@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mindeplex/screens/login_screen.dart';
 import '../service/database_service.dart';
 import '../service/auth_service.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -65,12 +67,10 @@ class ProfileScreen extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                // --- KAVİSLİ HEADER ALANI ---
                 Stack(
                   alignment: Alignment.center,
                   clipBehavior: Clip.none,
                   children: [
-                    // Renkli Arka Plan
                     Container(
                       height: 240,
                       decoration: BoxDecoration(
@@ -80,22 +80,20 @@ class ProfileScreen extends StatelessWidget {
                           bottomRight: Radius.circular(60),
                         ),
                         boxShadow: [
-                          BoxShadow(color: themeColor.withOpacity(0.4), blurRadius: 20, offset: const Offset(0, 10))
+                          BoxShadow(color: themeColor.withValues(alpha: 0.4),blurRadius: 20,offset: const Offset(0, 10))
                         ]
                       ),
-                      child: SafeArea(
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: IconButton(
-                            onPressed: () => AuthService().signOut(),
-                            icon: const Icon(Icons.logout, color: Colors.white70),
-                            tooltip: "Çıkış Yap",
-                          ),
+                      child: SafeArea(child: Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(onPressed: (){
+                          AuthService().signOut();
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                        }, icon: Icon(Icons.logout,color:Colors.white70),
+                        tooltip: "Çıkış Yap",
                         ),
-                      ),
+                      ),),
                     ),
 
-                    // Ortadaki Büyük Avatar
                     Positioned(
                       bottom: -50,
                       child: Container(
@@ -104,40 +102,38 @@ class ProfileScreen extends StatelessWidget {
                           color: const Color(0xFFF8F9FD),
                           shape: BoxShape.circle,
                           boxShadow: [
-                            BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 15, offset: const Offset(0, 10))
+                            BoxShadow(color: Colors.black.withValues(alpha: 0.1),blurRadius: 15,offset: const Offset(0, 10))
                           ]
                         ),
                         child: CircleAvatar(
                           radius: 55,
                           backgroundColor: Colors.white,
-                          child: Icon(rankIcon, size: 50, color: themeColor),
+                          child: Icon(rankIcon,size: 50,color: themeColor),
                         ),
                       ),
                     ),
-                    
-                    // Header içindeki İsim ve Rütbe
+
                     Positioned(
                       top: 100,
                       child: Column(
                         children: [
                           Text(
-                            user?.email?.split('@')[0] ?? "Kullanıcı",
+                            user?.email?.split('@')[0]??"Kullanıcı",
                             style: const TextStyle(
-                              fontSize: 24, 
-                              fontWeight: FontWeight.bold, 
-                              color: Colors.white
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color:Colors.white
                             ),
                           ),
                           const SizedBox(height: 5),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 4),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
-                              rankName,
-                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12, letterSpacing: 1),
+                              rankName,style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 12,letterSpacing: 1),
                             ),
                           ),
                         ],
@@ -146,112 +142,99 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 60), // Avatar boşluğu
+                const SizedBox(height: 60),
 
-                // --- İSTATİSTİKLER (Minimalist) ---
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _buildCleanStat("Seviye", "$level"),
-                      Container(width: 1, height: 40, color: Colors.grey.shade300),
+                      Container(width: 1,height: 40,color: Colors.grey.shade300),
                       _buildCleanStat("Puan", "$score"),
-                      Container(width: 1, height: 40, color: Colors.grey.shade300),
+                      Container(width: 1,height: 40,color:Colors.grey.shade300),
                       _buildCleanStat("İpucu", "$freeHints"),
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 40),
 
-                // --- KOLEKSİYON ALANI (Geniş Kartlar) ---
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Koleksiyonum", 
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey.shade800)
-                      ),
+                      Text("Koleksiyonum",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey.shade800),),
+
                       const SizedBox(height: 15),
+                      inventory.isEmpty
+                      ?Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(30),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [BoxShadow(color: Colors.grey.shade100,blurRadius: 10,offset: Offset(0, 5))],
+                        ),
+                      ):GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: inventory.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.4,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 15,
+                        ),
+                        itemBuilder: (context, index) {
+                          var item=getItemDetails(inventory[index]);
+                          bool isRare=item['rare']==true;
 
-                      inventory.isEmpty 
-                      ? Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(30),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [BoxShadow(color: Colors.grey.shade100, blurRadius: 10, offset: const Offset(0, 5))],
-                          ),
-                          child: Center(child: Text("Henüz bir eşyan yok.", style: TextStyle(color: Colors.grey.shade400))),
-                        )
-                      : GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: inventory.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // Yan yana 2 büyük kart
-                            childAspectRatio: 1.4, // Yatay dikdörtgen
-                            crossAxisSpacing: 15,
-                            mainAxisSpacing: 15,
-                          ),
-                          itemBuilder: (context, index) {
-                            var item = getItemDetails(inventory[index]);
-                            bool isRare = item['rare'] == true;
-
-                            return Container(
-                              padding: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                color: isRare ? item['bg'] : Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 5)
-                                  )
-                                ],
-                                border: isRare ? Border.all(color: item['color'], width: 1) : Border.all(color: Colors.transparent),
+                          return Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: isRare?item['bg']:Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withValues(alpha: 0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 5)
+                                )
+                              ],
+                              border: isRare?Border.all(color: item['color'],width: 1):Border.all(color: Colors.transparent),
                               ),
                               child: Row(
                                 children: [
-                                  // Sol: İkon
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      // İkonun arka planı artık eşyanın 'bg' rengi.
-                                      color: item['bg'], 
+                                      color:item['bg'],
                                       shape: BoxShape.circle,
-                                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 5)],
+                                      boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05),blurRadius: 5)],
                                     ),
-                                    // İkonun kendi rengi 'item['color']'
-                                    child: Icon(item['icon'], color: item['color'], size: 24),
+                                    child: Icon(item['icon'],color: item['color'],size: 24),
                                   ),
                                   const SizedBox(width: 12),
-                                  
-                                  // Sağ: İsim ve Bilgi
+
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          item['name'],
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold, 
+                                          item['name'],style: TextStyle(
+                                            fontWeight: FontWeight.bold,
                                             fontSize: 13,
-                                            // Eğer kart siyahsa yazı beyaz olsun
-                                            color: isRare && item['bg'] == Colors.black ? Colors.white : Colors.black87
+
+                                            color: isRare&&item['bg']==Colors.black?Colors.white:Colors.black87
                                           ),
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          isRare ? "Nadir Eşya" : "Standart",
-                                          style: TextStyle(fontSize: 10, color: isRare && item['bg'] == Colors.black ? Colors.grey : Colors.grey),
+                                          isRare?"Nadir Eşya":"Standart",
+                                          style: TextStyle(fontSize: 10,color: isRare&&item['bg']==Colors.black?Colors.grey:Colors.grey),
                                         ),
                                       ],
                                     ),
@@ -259,8 +242,8 @@ class ProfileScreen extends StatelessWidget {
                                 ],
                               ),
                             );
-                          },
-                        ),
+                        },
+                      ),
                     ],
                   ),
                 ),

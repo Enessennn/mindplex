@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mindeplex/screens/verify_email_screen.dart';
 import '../service/auth_service.dart';
-import '../main.dart'; // Başarılı olursa ana ekrana atmak için
+
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -35,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (mounted) {
         Navigator.pushAndRemoveUntil(
           context, 
-          MaterialPageRoute(builder: (context) => const MainScreen()), 
+          MaterialPageRoute(builder: (context) => const VerifyEmailScreen()), 
           (route) => false
         );
       }
@@ -51,65 +52,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Kayıt Ol")),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
+      body:Padding(
+        padding: const EdgeInsets.all(14.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              "Yeni Hesap Oluştur", 
-              textAlign: TextAlign.center, 
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
+              "Yeni Hesap Oluştur",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            Text(
-              "Puanlarını kaybetmemek için hemen aramıza katıl.", 
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
-            ),
-            const SizedBox(height: 30),
-            
-            // Email
+
             TextField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: "Email",
-                prefixIcon: const Icon(Icons.email),
+                prefixIcon: Icon(Icons.email),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
             ),
+
             const SizedBox(height: 16),
-            
-            // Şifre
+
             TextField(
               controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Şifre",
-                prefixIcon: const Icon(Icons.lock),
+                prefixIcon: Icon(Icons.lock),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
             ),
+
             const SizedBox(height: 24),
-            
-            // Kayıt Butonu (Yeşil renk)
-            isLoading 
-              ? const Center(child: CircularProgressIndicator())
-              : ElevatedButton(
-                  onPressed: _kayitOl,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green, // Girişten farklı olsun diye yeşil
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  child: const Text("KAYIT OL", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                ),
+
+            isLoading?const Center(child: CircularProgressIndicator())
+            :ElevatedButton(
+              onPressed: _kayitOl,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+
+              ),
+              child: Text("Kayıt Ol",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+            ),
           ],
         ),
-      ),
+      )
     );
   }
 }

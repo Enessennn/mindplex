@@ -119,7 +119,7 @@ class _MainScreenState extends State<MainScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.9), // Hafif saydam beyaz
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(40),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -263,7 +263,7 @@ class RealHomeScreen extends StatelessWidget {
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
                           child: Icon(rank['icon'], color: Colors.white, size: 24),
                         )
@@ -338,7 +338,7 @@ class RealHomeScreen extends StatelessWidget {
 }
 
 // --- OYUNLAR EKRANI ---
-// --- PREMIUM OYUNLAR EKRANI (GameHomeScreen) ---
+
 
 class GameHomeScreen extends StatelessWidget {
   const GameHomeScreen({super.key});
