@@ -51,3 +51,4 @@ Kullanıcının gelişimini takip ettiği ve ödüllendirildiği sistem.
 * **Firebase:** Auth, Firestore
 * **Algoritma:** Procedural Content Generation (Dinamik Bölüm Üretimi)
 * **Tasarım:** Glassmorphism UI
+* *Geliştirici: Enes Şen*
